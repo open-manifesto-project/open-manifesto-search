@@ -1,4 +1,4 @@
-PARLAMENTO2030.ES
+Search Proposals Tool - Open Manifesto Project
 =============
 
 ## Requirements
@@ -8,8 +8,8 @@ NodeJS > 10.0
 ## Setup
 
 ```
-git clone https://github.com/politicalwatch/parlamento2030.es.git
-cd parlamento2030.es
+git clone https://github.com/open-manifesto-project/open-manifesto-search.git
+cd open-manifesto-search
 npm install
 cp src/config/index.js.example src/config/index.js
 ```

@@ -1,15 +1,7 @@
 <template>
   <div>
-    <tipi-splash>
-      <img src="/img/logo_horizontal.png">
-      <p ><strong>Open Manifesto Project</strong> es un estándar abierto para programas electorales. Un formato estructurado para los programas de los partidos políticos que facilita su comprensión y la rendición de cuentas a la ciudadanía.</p>
-      <p>
-        <router-link :to="{name: 'about-en'}">Learn more about this project in English</router-link>
-      </p>
-    </tipi-splash>
     <div id="search" class="o-container o-section u-margin-bottom-10">
-      <tipi-header :title="'Propuestas electorales'" :subtitle="'Buscador de las propuestas electorales, dentro de los programas de diferentes partidos.'" />
-
+      <tipi-header :title="'Propuestas electorales'" :subtitle="'Buscador de programas electorales de las elecciones europeas, estatales y autonómicas de España'" />
       <search-form  :formData="this.data" @getResults="getResults" />
       <div class="o-grid o-grid--align-center u-margin-bottom-4" id="results">
         <div class="o-grid__col o-grid__col--fill">
