@@ -3,7 +3,7 @@
     <tipi-loader v-if="this.loadingResults" title="Cargando resultados" subtitle="Puede llevar algun tiempo" />
       <section class="o-masonry o-grid" v-if="this.proposals && this.proposals.length && !this.loadingResults">
         <div class="o-grid__col u-12 u-4@sm o-masonry__item" v-for="(proposal) in proposals" >
-          <proposal-card :proposal="proposal" :manifesto="manifestos[34]"  :logosStyles="logosStyles"  />
+          <proposal-card :proposal="proposal" :manifesto="manifestos[proposal.id_manifesto]"  :logosStyles="logosStyles"  />
         </div>
       </section>
   </div>
