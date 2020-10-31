@@ -81,8 +81,7 @@
 import Datepicker from 'vuejs-datepicker';
 import Multiselect from 'vue-multiselect';
 import { TipiIcon, TipiText } from 'tipi-uikit';
-import api from '@/api'
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import assign from "core-js/features/object/assign";
 

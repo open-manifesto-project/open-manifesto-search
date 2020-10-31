@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Dashboard from '@/views/Dashboard.vue'
 import Page404 from '@/views/Page404.vue'
 import config from '@/config';
 import VueRouter from 'vue-router'
