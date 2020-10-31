@@ -5,23 +5,23 @@ import api from '@/api';
 Vue.use(Vuex);
 
 const types = {
-  GET_PROPOSALS: 'GET_PROPOSALS',  
+  GET_PROPOSALS: 'GET_PROPOSALS',
   GET_MANIFESTOS: 'GET_MANIFESTOS',
   GET_DEPUTIES: 'GET_DEPUTIES',
-  GET_POLITICAL_PARTIES: 'GET_POLITICAL_PARTIES',  
+  GET_POLITICAL_PARTIES: 'GET_POLITICAL_PARTIES',
   GET_ELECTION_TYPES: 'GET_ELECTION_TYPES',
-  GET_GEOGRAPHICAL_AREAS: 'GET_GEOGRAPHICAL_AREAS',  
-  GET_PROPOSAL_TOPICS: 'GET_PROPOSAL_TOPICS',  
+  GET_GEOGRAPHICAL_AREAS: 'GET_GEOGRAPHICAL_AREAS',
+  GET_PROPOSAL_TOPICS: 'GET_PROPOSAL_TOPICS',
 };
 
 
 const state = {
   allElectionTypes: [],
   allManifestos:[],
-  allProposals: [],  
-  allPoliticalParties: [],  
+  allProposals: [],
+  allPoliticalParties: [],
   allGeographicalAreas: [],
-  allProposalTopics:[],  
+  allProposalTopics:[],
 };
 
 
@@ -76,7 +76,7 @@ const mutations = {
   },
   [types.GET_MANIFESTOS](state, manifestos) {
     state.allManifestos = manifestos;
-  }, 
+  },
   [types.GET_POLITICAL_PARTIES](state, political_parties) {
     state.allPoliticalParties = political_parties;
   },

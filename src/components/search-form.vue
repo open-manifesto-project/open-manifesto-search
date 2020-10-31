@@ -16,13 +16,13 @@
       </div>
       <div class="o-grid__col u-12 u-6@sm u-padding-bottom-4">
         <div class="c-select-label u-block">
-          <label for="proposal_topic">Temática</label>
+          <label for="topic">Temática</label>
           <multiselect
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
             v-model="form.topics"
-            :options="proposal_topics"
+            :options="topics"
             name="topics" id="topics" placeholder="Todos">
           </multiselect>
         </div>
@@ -56,13 +56,13 @@
       <div class="o-grid__col u-12 u-12@sm u-padding-bottom-4">
         <div class="c-input-label u-block">
           <label for="tags">Etiquetas</label>
-          <input 
-            v-model="csv_parser" 
-            type="text" 
+          <input
+            v-model="csv_parser"
+            type="text"
             height= "100"
-            id="tags" 
-            name="tags" 
-            placeholder="Filtra por etiquetas "> 
+            id="tags"
+            name="tags"
+            placeholder="Filtra por etiquetas">
         </div>
       </div>
     </div> <!-- /.o-grid -->
@@ -111,23 +111,22 @@ export default {
   computed: {
     ...mapState({
       political_parties: 'allPoliticalParties',
-      proposal_topics: 'allProposalTopics',
       geographical_areas: 'allGeographicalAreas',
       election_types: 'allElectionTypes',
-      topics: 'allTopics',
+      topics: 'allProposalTopics',
       types: 'allTypes',
       status: 'allStatus',
     })
   },
   methods: {
     cleanForm: function() {
-      this.form.threshold = 
-      this.form.political_party = 
+      this.form.threshold =
+      this.form.political_party =
       this.form.subtopics =
-      this.form.geographical_area = 
+      this.form.geographical_area =
       this.form.election_type=
       this.form.topics=
-      this.form.election_date = 
+      this.form.election_date =
       this.form.tags = '';
     },
     prepareTags: function() {
