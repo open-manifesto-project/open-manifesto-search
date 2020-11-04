@@ -69,7 +69,7 @@ export default {
         logo: "cup.png",
       },
       "Unidas Podemos": {
-        logo: "unidaspodemos.jpg",
+        logo: "unidaspodemos.png",
       },
       "Partido Popular": {
         logo: "pp.png",
@@ -79,6 +79,12 @@ export default {
       },
       "EH Bildu": {
         logo: "bildu.png",
+      },
+      "Ciudadanos": {
+        logo: "ciudadanos.png",
+      },
+      "VOX": {
+        logo: "vox.png",
       },
     },
     defaultColor: "#cecece",
