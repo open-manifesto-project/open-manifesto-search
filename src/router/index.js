@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import AboutEnglish from '@/views/AboutEnglish.vue'
 import Page404 from '@/views/Page404.vue'
 import config from '@/config';
 import VueRouter from 'vue-router'
 import Search from '@/views/Search.vue'
-import About from '@/views/About.vue'
 // eslint-disable-next-line no-unused-vars
 import from from "core-js/features/array/from";
 
@@ -37,7 +35,7 @@ const routes = [{
     name: "results",
     component: Search,
     meta: {
-      title: 'Resultados - Parlamento 2030',
+      title: 'Resultados - Open Manifesto Project',
       metaTags: [{
           name: 'description',
           content: 'Test Resultados'
@@ -49,16 +47,6 @@ const routes = [{
         , ...config.DEFAULT_METATAGS
       ]
     }
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: About
-  },
-  {
-    path: "/about-en",
-    name: "about-en",
-    component: AboutEnglish
   },
   {
     path: "/*",
