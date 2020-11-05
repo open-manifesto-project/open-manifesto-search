@@ -3,6 +3,7 @@ import Page404 from '@/views/Page404.vue'
 import config from '@/config';
 import VueRouter from 'vue-router'
 import Search from '@/views/Search.vue'
+import Manifestos from '@/views/Manifestos.vue'
 // eslint-disable-next-line no-unused-vars
 import from from "core-js/features/array/from";
 
@@ -30,6 +31,29 @@ const routes = [{
         , ...config.DEFAULT_METATAGS]
     }
   },
+    {
+    path: "/manifestos",
+    name: "manifestos",
+    component: Manifestos,
+    meta: {
+      title: 'Índice de programas',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Test Manifestos'
+        },
+        {
+          property: 'og:description',
+          content: 'Test Manifestos'
+        },
+        {
+          property: 'og:title',
+          content: 'Test Manifestos'
+        }
+        , ...config.DEFAULT_METATAGS]
+    }
+  },
+
   {
     path: "/results/:data?",
     name: "results",

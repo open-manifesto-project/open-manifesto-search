@@ -2,7 +2,18 @@ export default {
   SHORTNAME: process.env.VUE_APP_SHORTNAME || 'omp',
   URL: 'https://api.openmanifestoproject.org',
   USE_ALERTS: process.env.VUE_APP_USE_ALERTS || false,
-  MENU: [],
+  MENU: [
+  {
+      route : 'search',
+      name: 'Buscar',
+      condition: true,
+    },
+    {
+      route: 'manifestos',
+      name: 'Índice de programas',
+      condition: true,
+    },
+  ],
   LOGO: '/img/omp-white.png',
   DEFAULT_PAGE_TITLE: 'Open Manifesto Project',
   DEFAULT_METATAGS: [      ],
