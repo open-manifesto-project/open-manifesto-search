@@ -97,6 +97,12 @@ export default {
       "VOX": {
         logo: "vox.png",
       },
+      "Partido Regionalista de Cantabria":{
+        logo: "prc.png"
+      },
+      "En Comú-Podem": {
+        logo: "encomupodem.jpg"
+      },
     },
     defaultColor: "#cecece",
     defaultImage: "placeholder.png",
