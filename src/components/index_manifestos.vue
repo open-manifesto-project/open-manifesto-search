@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="about" class="o-container o-section u-margin-bottom-10">
+    <div class="o-container o-section u-margin-bottom-10">
       <div class="o-grid">
         <div class="o-grid__col u-12 u-6@sm">
           <ul class="Europeas"> <h3>Europeas</h3>

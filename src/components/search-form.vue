@@ -34,25 +34,25 @@
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
-            @select="allowArea"
-            @remove="clearElectionTypes"
+            @select="clearGeographicalArea"
+            @remove="clearGeographicalArea"
             v-model="form.election_type"
-            @cleared="this.clearElectionTypes"
+            @cleared="this.clearGeographicalArea"
             :options="election_types"
             name="election_type" id="election_type" placeholder="Todos">
           </multiselect>
         </div>
       </div>
       <div class="o-grid__col u-12 u-6@sm u-padding-bottom-4">
-        <div class="c-select-label u-block" :class="{ 'c-select-label--disabled' : showArea }">
+        <div class="c-select-label u-block" :class="{ 'c-select-label--disabled' : !allowArea  }">
           <label for="geographical_area">Área Geográfica</label>
           <multiselect
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
             v-model="form.geographical_area"
-            :options="geographical_areas"
-            :disabled = "showArea"
+            :options="geographical_areas.sort()"
+            :disabled="!allowArea"
             name="geographical_area" id="geographical_area" placeholder="Todos">
           </multiselect>
         </div>
@@ -104,7 +104,6 @@ export default {
   },
   data: function() {
     return {
-      showArea: true,
       csv_parser: '',
       form: {},
       errors: null,
@@ -122,26 +121,21 @@ export default {
       status: 'allStatus',
     }),
     allowArea: function() {
-      if(this.form.election_type == 'Autonómicas'){
-        this.showArea=false;
-      } else {
-        this.showArea=true;
-      }
+      return this.form.election_type == 'Autonómicas';
     }
   },
   methods: {
     cleanForm: function() {
-      this.form.threshold =
-      this.form.political_party =
-      this.form.subtopics =
-      this.form.geographical_area =
-      this.form.election_type=
-      this.form.topics=
-      this.form.election_date =
+      this.form.threshold = '';
+      this.form.political_party = '';
+      this.form.subtopics = '';
+      this.form.geographical_area = '';
+      this.form.election_type = '';
+      this.form.topics = '';
+      this.form.election_date = '';
       this.form.tags = '';
     },
-    clearElectionTypes: function() {
-      this.form.election_type = ''
+    clearGeographicalArea: function() {
       this.form.geographical_area = ''
     },
     prepareTags: function() {
