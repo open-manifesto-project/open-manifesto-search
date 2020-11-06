@@ -84,7 +84,7 @@ const mutations = {
     state.allProposalTopics = proposal_topics;
   },
   [types.GET_GEOGRAPHICAL_AREAS](state, geographical_areas) {
-    state.allGeographicalAreas = geographical_areas;
+    state.allGeographicalAreas = geographical_areas.sort();
   },
   [types.GET_ELECTION_TYPES](state, election_types) {
     state.allElectionTypes = election_types;

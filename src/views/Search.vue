@@ -26,7 +26,7 @@ import searchForm from '@/components/search-form';
 import ProposalCard from '@/components/ProposalCard.vue'
 import config from '@/config'
 import api from '@/api'
-import { TipiHeader, TipiCsvDownload, TipiMessage, TipiResults, TipiSplash } from 'tipi-uikit'
+import { TipiHeader, TipiMessage, TipiResults, TipiSplash } from 'tipi-uikit'
 import { mapGetters } from 'vuex';
 import OmpResults from '@/components/OmpResults.vue'
 const qs = require('qs');
@@ -40,7 +40,6 @@ export default {
     TipiSplash,
     TipiResults,
     TipiMessage,
-    TipiCsvDownload,
     TipiHeader,
     searchForm,
   },
@@ -62,16 +61,11 @@ export default {
       },
       loadingResults: false,
       proposalsLoaded:false,
-      csvItems: [],
-      LIMITCSV: 100,
       logosStyles: config.STYLES.logos,
       scrollToID: '#results'
     }
   },
   computed: {
-    canDownloadCSV: function() {
-      return this.query_meta.total < this.LIMITCSV;
-    },
     ...mapGetters(['getDeputyByName', 'getParliamentaryGroupByName']),
     message: function() {
       if (this.errors) {
@@ -136,27 +130,11 @@ export default {
     alertsIsEnabled: function() {
       return (config.USE_ALERTS === "true");
     },
-    loadCSVItems: function(event) {
-      if (!this.canDownloadCSV) return false;
-      event.target.innerText = "Procesando descarga...";
-      let params =  Object.assign({ per_page: this.LIMITCSV }, this.data);
-      api.getProposals(params)
-         .then(response => {
-           this.csvItems = response;
-           event.target.innerText = "Descarga datos";
-          })
-         .catch(error => this.errors = error);
-    },
   },
   created: function() {
     if (this.$route.name == "results") {
       this.getResults();
     }
-  },
-  updated: function() {
-    if (document.getElementById('downloadCSV')) {
-      document.getElementById('downloadCSV').click();
-    }
   }
-}
+};
 </script>

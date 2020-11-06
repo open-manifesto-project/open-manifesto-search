@@ -34,8 +34,8 @@
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
-            @select="clearGeographicalArea"
-            @remove="clearGeographicalArea"
+            @select="this.clearGeographicalArea"
+            @remove="this.clearGeographicalArea"
             v-model="form.election_type"
             @cleared="this.clearGeographicalArea"
             :options="election_types"
@@ -51,7 +51,7 @@
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
             v-model="form.geographical_area"
-            :options="geographical_areas.sort()"
+            :options="geographical_areas"
             :disabled="!allowArea"
             name="geographical_area" id="geographical_area" placeholder="Todos">
           </multiselect>
@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
 import Multiselect from 'vue-multiselect';
 import { TipiIcon, TipiText } from 'tipi-uikit';
 import { mapState } from 'vuex';
@@ -94,7 +93,6 @@ const moment = require('moment');
 export default {
   name: 'searchForm',
   components: {
-    Datepicker,
     Multiselect,
     TipiIcon,
     TipiText,
@@ -132,7 +130,6 @@ export default {
       this.form.geographical_area = '';
       this.form.election_type = '';
       this.form.topics = '';
-      this.form.election_date = '';
       this.form.tags = '';
     },
     clearGeographicalArea: function() {
@@ -146,22 +143,15 @@ export default {
         this.form.threshold = 0;
       }
     },
-    clearStartDate: function() {
-      this.form.election_date = '';
-    },
     getResults: function(event) {
       this.prepareTags();
-      this.form.election_date = this.form.election_date ? moment(this.form.election_date).format('YYYY-MM-DD') : undefined;
       this.$emit('getResults', event, this.form);
     },
   },
   created: function() {
     this.form = Object.assign({}, this.formData);
-/*    if (this.topics.length) {
-      this.prepareForm();
-    }*/
   },
-}
+};
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="directory" class="o-container o-section u-margin-bottom-10">
+    <div id="directory-listing" class="o-container o-section u-margin-bottom-10">
       <tipi-header title="Índice de programas"/>
         <div class="o-container o-section u-margin-bottom-10">
           <div class="o-grid">
@@ -14,7 +14,7 @@
             </div>
             <div class="o-grid__col u-12 u-6@sm">
               <ul class = "Autonómicas"><h3>Autonómicas</h3>
-                <ul v-for="k in this.autonomicas" v-bind:key="k">
+                <ul v-for="(k, i) in this.autonomicas" v-bind:key="i">
                   <h4>{{k.Autonomía}}</h4>
                   <li class="u-text-overline" v-for="party in k.Partidos" v-bind:key="party">{{party}}</li>
                 </ul>
