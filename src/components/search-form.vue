@@ -34,21 +34,25 @@
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
+            @select="clearGeographicalArea"
+            @remove="clearGeographicalArea"
             v-model="form.election_type"
+            @cleared="this.clearGeographicalArea"
             :options="election_types"
             name="election_type" id="election_type" placeholder="Todos">
           </multiselect>
         </div>
       </div>
       <div class="o-grid__col u-12 u-6@sm u-padding-bottom-4">
-        <div class="c-select-label u-block">
+        <div class="c-select-label u-block" :class="{ 'c-select-label--disabled' : !allowArea  }">
           <label for="geographical_area">Área Geográfica</label>
           <multiselect
             selectedLabel="Seleccionado"
             selectLabel=""
             deselectLabel="Pulsa para deseleccionar"
             v-model="form.geographical_area"
-            :options="geographical_areas"
+            :options="geographical_areas.sort()"
+            :disabled="!allowArea"
             name="geographical_area" id="geographical_area" placeholder="Todos">
           </multiselect>
         </div>
@@ -115,18 +119,24 @@ export default {
       topics: 'allProposalTopics',
       types: 'allTypes',
       status: 'allStatus',
-    })
+    }),
+    allowArea: function() {
+      return this.form.election_type == 'Autonómicas';
+    }
   },
   methods: {
     cleanForm: function() {
-      this.form.threshold =
-      this.form.political_party =
-      this.form.subtopics =
-      this.form.geographical_area =
-      this.form.election_type=
-      this.form.topics=
-      this.form.election_date =
+      this.form.threshold = '';
+      this.form.political_party = '';
+      this.form.subtopics = '';
+      this.form.geographical_area = '';
+      this.form.election_type = '';
+      this.form.topics = '';
+      this.form.election_date = '';
       this.form.tags = '';
+    },
+    clearGeographicalArea: function() {
+      this.form.geographical_area = ''
     },
     prepareTags: function() {
       if(this.csv_parser != ''){
@@ -150,7 +160,7 @@ export default {
 /*    if (this.topics.length) {
       this.prepareForm();
     }*/
-  }
+  },
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
