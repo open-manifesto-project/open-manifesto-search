@@ -1,76 +1,112 @@
 <template>
   <div>
-    <div id="about" class="o-container o-section u-margin-bottom-10">
+    <div id="directory-listing" class="o-container o-section u-margin-bottom-10">
       <tipi-header title="Índice de programas"/>
-      <div class="o-grid">
-        <div class="o-grid__col u-8@sm u-offset-0@sm">
-          <ul class="u-text-th3" v-for="(manifesto, type) in this.index" v-bind:key="type">{{type}}
-            <ul class="u-text-th4" v-for= "(v,k) in manifesto">
-              <h4 v-if="type =='Autonómicas'">{{k}}</h4>
-              <ul class="u-text-overline">
-                <li v-for="(p) in v">{{p.political_party}}</li>
+        <div class="o-container o-section u-margin-bottom-10">
+          <div class="o-grid">
+            <div class="o-grid__col u-12 u-6@sm">
+              <ul class="Europeas"> <h3>Europeas</h3>
+                <li class="u-text-overline" v-for="party in this.europeas[0]" v-bind:key="party">{{party}}</li>
               </ul>
-            </ul>
-          </ul>
+              <ul class="Generales"> <h3>Generales</h3>
+                <li class="u-text-overline" v-for="party in this.generales[0]" v-bind:key="party">{{party}}</li>
+              </ul>
+            </div>
+            <div class="o-grid__col u-12 u-6@sm">
+              <ul class = "Autonómicas"><h3>Autonómicas</h3>
+                <ul v-for="(k, i) in this.autonomicas" v-bind:key="i">
+                  <h4>{{k.Autonomía}}</h4>
+                  <li class="u-text-overline" v-for="party in k.Partidos" v-bind:key="party">{{party}}</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TipiHeader, TipiText } from 'tipi-uikit';
-import { mapState } from 'vuex';
-import nestedGroupby from 'nested-groupby';
-import Vue from 'vue';
-export default {
-  name: 'manifestos',
-  components: {
-    TipiHeader,
-    TipiText,
-  },
-  data: function() {
-    return {
-      election_types: [],
-      index: [],
-      parties: [],
-    }
-  },
-  computed: {
-    ...mapState({
-      manifestos: 'allManifestos',
-    })
-  },
-  methods: {
-    groupByParty: function(){
-      this.index = nestedGroupby(this.manifestos,['election_type','geographical_area']); 
-      this.election_types = Object.keys(this.index)
-      this.geographical_areas = Object.values(this.index)
-      console.log(this.index)
-    },
-  },
-  created: function() {
-    this.groupByParty();
-  },
-  updated: function() {
-    this.groupByParty();
-  }
-}
+  import Masonry from "masonry-layout";
+  import { mapState } from 'vuex';
+  import { TipiHeader, TipiLoader } from 'tipi-uikit'
+  import nestedGroupby from 'nested-groupby';
+
+  export default {
+      name: 'manifestos',
+      components: {
+          Masonry,
+          TipiHeader,
+          TipiLoader
+        },
+      data: function() {
+          return {
+              index: [],
+              europeas: {},
+              generales: [],
+              autonomicas: {},
+            }
+        },
+      computed: {
+          ...mapState({
+              manifestos: 'allManifestos',
+            })
+        },
+      methods: {
+          groupByParty: function(){
+              this.index = nestedGroupby(this.manifestos,['election_type','geographical_area']);
+              this.aut_keys = (Object.keys(this.index.Autonómicas)).sort();
+              this.europeas = this.build_gen_eur(Object.values(this.index.Europeas));
+              this.generales = this.build_gen_eur(Object.values(this.index.Generales));
+              this.autonomicas = this.build_autonomics(this.aut_keys, this.index)
+            },
+          build_gen_eur: function(dict)  {
+              var sorts = []
+              dict.forEach((obj) => {
+                  var claves = []
+                  obj.forEach((value) => {
+                      claves.push(value.political_party)
+                    })
+                  claves.sort()
+                  sorts.push(claves)
+                })
+              return sorts;
+            },
+          build_autonomics: (keys, index) => {
+              var autonomics = []
+              let indice = index.Autonómicas
+              keys.forEach(function(key) {
+                  var partidos = []
+                  indice[key].forEach((manifesto)=>{
+                      partidos.push(manifesto.political_party)
+                    })
+                  autonomics.push({'Autonomía': key, 'Partidos': partidos.sort()})
+                })
+              return autonomics;
+            }
+        },
+      watch: {
+          manifestos: function() {
+              if (this.manifestos && this.manifestos.length) {
+                  this.groupByParty();
+                }
+            },
+        },
+      mounted: function() {
+          this.groupByParty();
+          window.addEventListener('resize', function() {
+              this.groupByParty();
+            }.bind(this));
+        },
+    };
 </script>
 
 <style scoped lang="scss">
-.u-text-th3{
+li {
   list-style: none;
-  padding-left:20px;
+  padding-left:15px;
 }
-.u-text-th4{
-  padding-top:10px;
-  list-style: none;
-  padding-left:40px;
-}
-.u-text-overline{
-  padding-top:08px;
-  padding-left: 45px;
-  color: #354661;
+h3, h4 {
+  padding-top: 15px;
 }
 </style>

@@ -49,4 +49,7 @@
 </script>
 
 <style lang="scss">
+.c-menu__link:hover {
+    color: $secondary !important;
+}
 </style>
