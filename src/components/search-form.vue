@@ -59,14 +59,14 @@
       </div>
       <div class="o-grid__col u-12 u-12@sm u-padding-bottom-4">
         <div class="c-input-label u-block">
-          <label for="tags">Etiquetas</label>
+          <label for="tags">Palabras clave</label>
           <input
             v-model="csv_parser"
             type="text"
             height= "100"
             id="tags"
             name="tags"
-            placeholder="Filtra por etiquetas">
+            placeholder="Filtra por palabras clave tales como Iglesia católica, autónomos o cine">
         </div>
       </div>
     </div> <!-- /.o-grid -->
@@ -87,6 +87,7 @@ import { TipiIcon, TipiText } from 'tipi-uikit';
 import { mapState } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import assign from "core-js/features/object/assign";
+import * as Utils from '../utils';
 
 const moment = require('moment');
 
@@ -138,7 +139,8 @@ export default {
     prepareTags: function() {
       if(this.csv_parser != ''){
         this.form.threshold = 1;
-        this.form.tags = this.csv_parser.replaceAll(' ',',');
+        let csvtext = this.csv_parser.replace(/[  ]+/g, ',').toLowerCase();
+        this.form.tags = Utils.deleteStopWordsFromCSV(csvtext);
       } else {
         this.form.threshold = 0;
       }
