@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="search" class="o-container o-section u-margin-bottom-10">
-      <tipi-header :title="'Propuestas electorales'" :subtitle="'Buscador de programas electorales de las elecciones europeas, estatales y autonómicas de España'" />
+      <tipi-header :title="'Propuestas electorales'" :subtitle="'Buscador de propuestas electorales de las elecciones europeas, estatales y autonómicas de España'" />
       <search-form  :formData="this.data" @getResults="getResults" />
       <div class="o-grid o-grid--align-center u-margin-bottom-4" id="results">
         <div class="o-grid__col o-grid__col--fill">
