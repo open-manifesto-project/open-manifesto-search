@@ -84,6 +84,7 @@ const mutations = {
     state.allProposalTopics = proposal_topics;
   },
   [types.GET_GEOGRAPHICAL_AREAS](state, geographical_areas) {
+    geographical_areas.splice(geographical_areas.indexOf('Estado español'), 1)
     state.allGeographicalAreas = geographical_areas.sort();
   },
   [types.GET_ELECTION_TYPES](state, election_types) {
