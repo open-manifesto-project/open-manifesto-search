@@ -6,15 +6,15 @@
           <div class="o-grid">
             <div class="o-grid__col u-12 u-6@sm">
               <ul class="Europeas"> <h3>Europeas</h3>
-                <li class="u-text-overline" v-for="party in this.europeas[0]" v-bind:key="party">{{party}}</li>
+                <li class="u-text-overline" v-for="party in this.europeans[0]" v-bind:key="party">{{party}}</li>
               </ul>
               <ul class="Generales"> <h3>Generales</h3>
-                <li class="u-text-overline" v-for="party in this.generales[0]" v-bind:key="party">{{party}}</li>
+                <li class="u-text-overline" v-for="party in this.generals[0]" v-bind:key="party">{{party}}</li>
               </ul>
             </div>
             <div class="o-grid__col u-12 u-6@sm">
               <ul class = "Autonómicas"><h3>Autonómicas</h3>
-                <ul v-for="(k, i) in this.autonomicas" v-bind:key="i">
+                <ul v-for="(k, i) in this.autonomic" v-bind:key="i">
                   <h4>{{k.Autonomía}}</h4>
                   <li class="u-text-overline" v-for="party in k.Partidos" v-bind:key="party">{{party}}</li>
                 </ul>
@@ -42,9 +42,9 @@
       data: function() {
           return {
               index: [],
-              europeas: {},
-              generales: [],
-              autonomicas: {},
+              europeans: {},
+              generals: [],
+              autonomic: {},
             }
         },
       computed: {
@@ -55,29 +55,29 @@
       methods: {
           groupByParty: function(){
               this.index = nestedGroupby(this.manifestos,['election_type','geographical_area']);
-              this.aut_keys = (Object.keys(this.index.Autonómicas)).sort();
-              this.europeas = this.build_gen_eur(Object.values(this.index.Europeas));
-              this.generales = this.build_gen_eur(Object.values(this.index.Generales));
-              this.autonomicas = this.build_autonomics(this.aut_keys, this.index)
+              this.aut_keys = (Object.keys(this.index['Autonómicas'])).sort();
+              this.europeans = this.build_gen_eur(Object.values(this.index['Europeas']));
+              this.generals = this.build_gen_eur(Object.values(this.index['Generales']));
+              this.autonomic = this.build_autonomics(this.aut_keys, this.index)
             },
-          build_gen_eur: function(dict)  {
+          build_gen_eur: function(aut_titles)  {
               var sorts = []
-              dict.forEach((obj) => {
-                  var claves = []
-                  obj.forEach((value) => {
-                      claves.push(value.political_party)
+              aut_titles.forEach((autonomy) => {
+                  var keys = []
+                  autonomy.forEach((manifesto) => {
+                      keys.push(manifesto.political_party)
                     })
-                  claves.sort()
-                  sorts.push(claves)
+                  keys.sort()
+                  sorts.push(keys)
                 })
               return sorts;
             },
           build_autonomics: (keys, index) => {
               var autonomics = []
-              let indice = index.Autonómicas
+              let front_index = index['Autonómicas']
               keys.forEach(function(key) {
                   var partidos = []
-                  indice[key].forEach((manifesto)=>{
+                  front_index[key].forEach((manifesto)=>{
                       partidos.push(manifesto.political_party)
                     })
                   autonomics.push({'Autonomía': key, 'Partidos': partidos.sort()})

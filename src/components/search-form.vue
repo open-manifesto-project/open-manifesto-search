@@ -61,7 +61,7 @@
         <div class="c-input-label u-block">
           <label for="tags">Etiquetas</label>
           <input
-            v-model="csv_parser"
+            v-model="form.tags"
             type="text"
             height= "100"
             id="tags"
@@ -136,9 +136,9 @@ export default {
       this.form.geographical_area = ''
     },
     prepareTags: function() {
-      if(this.csv_parser != ''){
+      if(this.form.tags != ''){
         this.form.threshold = 1;
-        this.form.tags = this.csv_parser.replaceAll(' ',',');
+        this.form.tags = this.form.tags.replaceAll(' ',',');
       } else {
         this.form.threshold = 0;
       }
