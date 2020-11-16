@@ -61,7 +61,7 @@
         <div class="c-input-label u-block">
           <label for="tags">Palabras clave</label>
           <input
-            v-model="csv_parser"
+            v-model="form.tags"
             type="text"
             height= "100"
             id="tags"
@@ -137,9 +137,9 @@ export default {
       this.form.geographical_area = ''
     },
     prepareTags: function() {
-      if(this.csv_parser != ''){
+      if(this.form.tags != '' ){
         this.form.threshold = 1;
-        let csvtext = this.csv_parser.replace(/[  ]+/g, ',').toLowerCase();
+        let csvtext = this.form.tags.replace(/[  ]+/g, ',').toLowerCase();
         this.form.tags = Utils.deleteStopWordsFromCSV(csvtext);
       } else {
         this.form.threshold = 0;
