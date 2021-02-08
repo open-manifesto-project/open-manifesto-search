@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Page404 from '@/views/Page404.vue'
 import config from '@/config';
 import VueRouter from 'vue-router'
+import Proposal from '@/views/Proposal.vue'
 import Search from '@/views/Search.vue'
 import Manifestos from '@/views/Manifestos.vue'
 // eslint-disable-next-line no-unused-vars
@@ -67,6 +68,24 @@ const routes = [{
         {
           property: 'og:description',
           content: 'Test Resultados'
+        }
+        , ...config.DEFAULT_METATAGS
+      ]
+    }
+  },
+  {
+    path: "/proposal/:id",
+    name: "proposal",
+    component: Proposal,
+    meta: {
+      title: 'Propuestas',
+      metaTags: [{
+          name: 'description',
+          content: 'Propuesta'
+        },
+        {
+          property: 'og:description',
+          content: 'Propuesta'
         }
         , ...config.DEFAULT_METATAGS
       ]

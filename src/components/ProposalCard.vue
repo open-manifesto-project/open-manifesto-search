@@ -2,7 +2,7 @@
   <div>
     <article class="c-initiative-card" :id="`initiative-card-${proposal.id}`">
       <topic-pill class="c-initiative-card__topics"  :topicsStyles="logosStyles" :topics="proposal.topics"/>
-        <h2 class="c-initiative-card__title" >{{proposal.body}}</h2>
+        <h2 class="c-initiative-card__title"><a :href="proposalUrl">{{proposal.body}}</a></h2>
         <div class="o-grid">
           <div class=" o-grid__col u-12 u-2@sm">
             <img :src="`/img/manifestoLogos/${this.logosStyles[manifesto.political_party].logo}`" width="100%" height = "100%" style="border-radius:50%;">
@@ -20,30 +20,28 @@
 </template>
 
 <script>
-  const moment = require('moment');
-  moment.locale('es');
-  import {TipiIcon, TipiText} from 'tipi-uikit';
-  import TopicPill from '@/components/TopicPill.vue';
-  export default {
-      name: 'ProposalCard',
-      components: {
-          TipiIcon,
-          TopicPill,
-          TipiText,
-        },
-      data: function() {
-          return{
-              moment: moment,
-            };
-        },
-      props: {
-          proposal: Object,
-          logosStyles: Object,
-          manifesto: Object,
-        },
-      methods: {
-        },
-    };
+import {TipiIcon, TipiText} from 'tipi-uikit';
+import TopicPill from '@/components/TopicPill.vue';
+export default {
+  name: 'ProposalCard',
+  components: {
+    TipiIcon,
+    TopicPill,
+    TipiText,
+  },
+  computed: {
+    proposalUrl: function () {
+      return '/proposal/' + this.proposal.id
+    }
+  },
+  props: {
+    proposal: Object,
+    logosStyles: Object,
+    manifesto: Object,
+  },
+  methods: {
+  },
+};
 </script>
 
 <style scoped lang="scss">

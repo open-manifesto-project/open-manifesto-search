@@ -1,6 +1,7 @@
 export default {
   SHORTNAME: process.env.VUE_APP_SHORTNAME || 'omp',
-  URL: 'https://api.openmanifestoproject.org',
+  //URL: 'http://api.openmanifestoproject.org',
+  URL: 'http://localhost:5000',
   USE_ALERTS: process.env.VUE_APP_USE_ALERTS || false,
   MENU: [
   {
