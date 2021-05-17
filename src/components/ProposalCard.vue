@@ -4,14 +4,14 @@
       <topic-pill class="c-initiative-card__topics"  :topicsStyles="logosStyles" :topics="proposal.topics"/>
         <h2 class="c-initiative-card__title"><a :href="proposalUrl">{{proposal.body}}</a></h2>
         <div class="o-grid">
-          <div class=" o-grid__col u-12 u-2@sm">
+          <div class=" o-grid__col u-12 u-2@xs">
             <img :src="`/img/manifestoLogos/${this.logosStyles[manifesto.political_party].logo}`" width="100%" height = "100%" style="border-radius:50%;">
           </div>
-          <div class="o-grid__col u-12 u-10@sm" >
+          <div class="o-grid__col u-12 u-10@xs" >
             <div class="u-text-th9">{{manifesto.political_party}}</div>
             <div class="u-text-overline" >
               <span class="u-color-secondary-dark">{{manifesto.election_type}}</span>
-              <span class="u-color-secondary" v-if="manifesto.election_type == 'Autonómicas'">{{manifesto.geographical_area}}</span> 
+              <span class="u-color-secondary" v-if="manifesto.election_type == 'Autonómicas'">{{manifesto.geographical_area}}</span>
             </div>
           </div>
         </div>
